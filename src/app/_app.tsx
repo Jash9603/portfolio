@@ -1,6 +1,7 @@
 // src/app/_app.tsx
 import { AppProps } from 'next/app';
 import { useEffect } from 'react';
+import '../styles/globals.css'; // Optional: only if you're using global styles
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -13,7 +14,9 @@ export default function App({ Component, pageProps }: AppProps) {
     };
 
     document.addEventListener('mousemove', moveCursor);
-    return () => document.removeEventListener('mousemove', moveCursor);
+    return () => {
+      document.removeEventListener('mousemove', moveCursor);
+    };
   }, []);
 
   return <Component {...pageProps} />;
