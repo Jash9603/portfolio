@@ -3,19 +3,151 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --bg-page: #264653;
+  --bg-sidebar: #264653;
+  --bg-footer: #264653;
+  --bg-card: rgba(42,157,143,0.12); /* #2A9D8F at 12% opacity */
+  --shadow-card: 0 2px 8px 0 rgba(0,0,0,0.1);
+  --shadow-card-hover: 0 8px 24px 0 rgba(0,0,0,0.15);
+  --text-main: #F1F1F1;
+  --text-secondary: rgba(233,196,106,0.7);
+  --heading: #E9C46A;
+  --meta: rgba(42,157,143,0.7);
+  --button-primary-bg: #F4A261;
+  --button-primary-text: #264653;
+  --button-primary-hover-bg: #E76F51;
+  --button-primary-hover-text: #FFF;
+  --button-secondary-bg: #2A9D8F;
+  --button-secondary-text: #FFF;
+  --button-secondary-hover-bg: #21867a;
+  --link: #2A9D8F;
+  --link-hover: #E76F51;
+  --input-border: #2A9D8F;
+  --input-focus: #F4A261;
+  --input-bg: #264653;
+  --input-text: #F1F1F1;
+  --icon: #E9C46A;
+  --icon-accent: #F4A261;
+  --radius: 12px;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-page);
+  font-family: 'Inter', 'Poppins', 'Work Sans', Arial, Helvetica, sans-serif;
+  transition: background var(--transition), color var(--transition);
+}
+
+section, nav, footer, main {
+  transition: background var(--transition), color var(--transition);
+}
+
+nav, .sidebar, footer {
+  background: var(--bg-sidebar);
+  color: var(--heading);
+}
+
+footer {
+  color: var(--text-secondary);
+}
+
+.card {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: none;
+  transition: box-shadow var(--transition), transform var(--transition), background var(--transition), color var(--transition);
+}
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: scale(1.02) translateY(-3px);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading);
+  font-family: 'Inter', 'Poppins', 'Work Sans', Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: var(--link);
+  transition: color var(--transition), text-decoration var(--transition);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+button, .btn {
+  border-radius: var(--radius);
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+.btn, .btn-primary {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+}
+.btn:hover, .btn-primary:hover {
+  background: var(--button-primary-hover-bg);
+  color: var(--button-primary-hover-text);
+  box-shadow: 0 4px 16px 0 rgba(231,111,81,0.12);
+}
+.btn-secondary {
+  background: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+}
+.btn-secondary:hover {
+  background: var(--button-secondary-hover-bg);
+  color: var(--button-secondary-text);
+  box-shadow: 0 4px 16px 0 rgba(42,157,143,0.12);
+}
+
+input, textarea {
+  border: 1.5px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--input-text);
+  border-radius: var(--radius);
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+input:focus, textarea:focus {
+  border-color: var(--input-focus);
+  outline: none;
+}
+
+.icon, .highlight {
+  color: var(--icon);
+}
+.icon-accent {
+  color: var(--icon-accent);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+.text-meta {
+  color: var(--meta);
+}
+
+/* Active nav item highlight */
+.nav-active {
+  color: #FFF !important;
+  background: var(--button-secondary-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 0 8px 0 var(--button-secondary-bg);
+  text-decoration: underline;
+}
+
+/* Soft glow cursor effect */
+.cursor-glow {
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2A9D8F 0%, rgba(42,157,143,0.18) 80%);
+  mix-blend-mode: lighten;
+  opacity: 0.7;
+  z-index: 9999;
+  transition: transform var(--transition);
 }
