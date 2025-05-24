@@ -1,28 +1,20 @@
-"use client";
-import '../app/globals.css';
+// src/app/_app.tsx
+import { AppProps } from 'next/app';
 import { useEffect } from 'react';
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const cursor = document.getElementById('cursor-glow');
     if (!cursor) return;
-    let mouseX = 0, mouseY = 0, currentX = 0, currentY = 0;
-    const move = (e) => {
-      mouseX = e.clientX - 16;
-      mouseY = e.clientY - 16;
+
+    const moveCursor = (e: MouseEvent) => {
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
     };
-    const animate = () => {
-      currentX += (mouseX - currentX) * 0.18;
-      currentY += (mouseY - currentY) * 0.18;
-      cursor.style.transform = `translate3d(${currentX}px,${currentY}px,0)`;
-      requestAnimationFrame(animate);
-    };
-    window.addEventListener('mousemove', move);
-    animate();
-    return () => window.removeEventListener('mousemove', move);
+
+    document.addEventListener('mousemove', moveCursor);
+    return () => document.removeEventListener('mousemove', moveCursor);
   }, []);
-  return <>
-    <div id="cursor-glow" className="cursor-glow" />
-    <Component {...pageProps} />
-  </>;
-} 
+
+  return <Component {...pageProps} />;
+}
